@@ -13,15 +13,19 @@ position_x = 200
 position_y = 100
 d = 10
 
+lista_cobra = [[position_x, position_y]]
+
 pygame.display.set_caption("---- Snake ----")
 
 dis.fill(azul)
 clock = pygame.time.Clock()
 
-def desenha_cobra():
-  pygame.draw.rect(dis, vermelho, [position_x, position_y, d, d])
+def desenha_cobra(lista_cobra):
+  dis.fill(azul)
+  for unidade in lista_cobra:
+    pygame.draw.rect(dis, vermelho, [unidade[0], unidade[1], d, d])
 
-def mover_cobra(position_x, position_y):
+def mover_cobra(lista_cobra):
   delta_x = 0
   delta_y = 0
 
@@ -40,13 +44,17 @@ def mover_cobra(position_x, position_y):
         delta_x = 0
         delta_y = d
 
-  position_x = position_x + delta_x
-  position_y = position_y + delta_y
+  x_novo = lista_cobra[-1][0] + delta_x
+  y_novo = lista_cobra[-1][1] + delta_y
 
-  return position_x, position_y
+  lista_cobra.append([x_novo, y_novo])
+
+  del lista_cobra[0]
+
+  return lista_cobra
 
 while True:
   pygame.display.update()
-  desenha_cobra()
-  position_x, position_y = mover_cobra(position_x, position_y)
+  desenha_cobra(lista_cobra)
+  lista_cobra = mover_cobra(lista_cobra)
   clock.tick(1)
