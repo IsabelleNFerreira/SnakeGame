@@ -18,6 +18,7 @@ lista_cobra = [[position_x, position_y]]
 dx = 0
 dy = 0
 
+#A posição inicial da comida é gerada randomicamente
 x_comida = round(random.randrange(0, 400 - d) / 20) * 20
 y_comida = round(random.randrange(0, 400 - d) / 20) * 20
 
@@ -63,7 +64,8 @@ def verifica_comida(dx, dy, x_comida, y_comida, lista_cobra):
 
   if (head[0] == x_comida) and (head[1] == y_comida):  #Se a posição inicial da cobra "head" passar pela posição ocupada pela comida
     lista_cobra.append([x_novo, y_novo])    #a lista de posições/o tamanho da cobra aumenta e uma nova posição é criada
-  
+    x_comida = round(random.randrange(0, 400 - d) / 20) * 20  #A posição da nova comida também é criada randomicamente
+    y_comida = round(random.randrange(0, 400 - d) / 20) * 20
   pygame.draw.rect(dis, verde, [x_comida, y_comida, d, d])
   return x_comida, y_comida, lista_cobra
 
